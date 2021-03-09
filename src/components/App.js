@@ -5,16 +5,43 @@ import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
 
+
 function App() {
+
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+
+  function handleEditAvatarClick () {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+  }
+
   return (
-    (
       <body className="root">
       <Header/>
-      <Main/>
+      <Main
+        onEditProfile = {handleEditProfileClick}
+        onEditAvatar = {handleEditAvatarClick}
+        onAddPlace = {handleAddPlaceClick}
+      />
       <Footer/>
 
-      <PopupWithForm name="popup-user" title="Редактировать профиль">
-        children={(
+      <PopupWithForm name="user" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <>
           <label>
             <input id="user-input" type="text" name="name" value="" className="popup__input popup__input-name"
@@ -30,11 +57,9 @@ function App() {
           </label>
           <button type="submit" className="popup__button">Сохранить</button>
         </>
-      )}
       </PopupWithForm>
 
-      <PopupWithForm name="popup-place" title="Новое место">
-        children={(
+      <PopupWithForm name="place" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
         <>
           <label>
             <input id="place-input" type="text" name="place-title" value=""
@@ -52,21 +77,17 @@ function App() {
           </label>
           <button type="submit" className="popup__button popup__button_small popup__button-place">Создать</button>
         </>
-      )}
       </PopupWithForm>
 
       <ImagePopup/>
 
       <PopupWithForm name="popup-delete-card" title="Вы уверены?">
-        children={(
         <>
           <button type="submit" className="popup__button popup__button_small popup__button-place">Да</button>
         </>
-      )}
       </PopupWithForm>
 
-      <PopupWithForm name="popup-avatar" title="Обновить аватар?">
-        children={(
+      <PopupWithForm name="avatar" title="Обновить аватар?" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <>
           <label>
             <input id="input" type="url" name="image" value=""
@@ -77,13 +98,11 @@ function App() {
           </label>
           <button type="submit" className="popup__button popup__button_small popup__button-place">Создать</button>
         </>
-      )}
       </PopupWithForm>
 
       {/*<script type="module" src="../index.js">*/}
       {/*</script>*/}
       </body>
-    )
   );
 }
 

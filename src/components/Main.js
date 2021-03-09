@@ -1,19 +1,8 @@
 import React from "react";
 import Avatar from "../images/avatar.jpg"
 
-function Main() {
+function Main(props) {
 
-  const handleEditAvatarClick = (e) => {
-    e.target.classList.add('popup_opened');
-  }
-
-  function handleEditProfileClick(e) {
-    e.target.classList.add('popup_opened');
-  }
-
-  function handleAddPlaceClick(e) {
-    e.target.classList.add('popup_opened');
-  }
 
   return (
     (
@@ -22,18 +11,18 @@ function Main() {
           <div className="profile__avatar-container">
             <img src={Avatar} alt="аватар пользователя" className="profile__avatar"/>
             <button className="profile__avatar-edit"
-                    onClick={handleEditAvatarClick}>
+                    onClick={props.onEditAvatar}>
             </button>
           </div>
           <div className="profile__info">
             <h1 className="profile__name">Жак-Ив Кусто</h1>
             <button type="button" className="profile__edit-button"
-                    onClick={handleEditProfileClick}>
+                    onClick={props.onEditProfile}>
             </button>
             <p className="profile__profession">Исследователь океана</p>
           </div>
           <button type="button" className="profile__add-button"
-                  onClick={handleAddPlaceClick}>
+                  onClick={props.onAddPlace}>
           </button>
         </section>
         <section className="elements root__elements">
