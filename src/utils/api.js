@@ -1,5 +1,3 @@
-import React from "react";
-
 class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;

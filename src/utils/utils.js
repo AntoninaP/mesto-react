@@ -1,5 +1,3 @@
-import React from "react";
-
 export const containerElements = '.elements';
 export const popupForm = '.popup__form';
 export const popupPreview = document.querySelector('.popup-preview');

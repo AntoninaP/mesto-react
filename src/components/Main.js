@@ -1,6 +1,6 @@
 import React from "react";
-import Avatar from "../images/avatar.jpg"
 import newApi from "../utils/api";
+import Card from "./Card";
 
 function Main(props) {
 
@@ -8,12 +8,15 @@ function Main(props) {
   const [userDescription, setDescription] = React.useState('');
   const [userAvatar, setAvatar] = React.useState('');
 
- newApi.getProfileInfo()
-   .then((data) => {
-     setUserName(data.name);
-     setDescription(data.about);
-     setAvatar(data.avatar);
-   })
+  React.useEffect(() => {
+    newApi.getProfileInfo()
+      .then((data) => {
+        setUserName(data.name);
+        setDescription(data.about);
+        setAvatar(data.avatar);
+      })
+  }, [])
+
 
   return (
     (
@@ -36,23 +39,7 @@ function Main(props) {
                   onClick={props.onAddPlace}>
           </button>
         </section>
-        <section className="elements root__elements">
-          <template className="template template_type_default">
-            <div className="elements__item">
-              <img src="<%=require('./images/kamchatka.jpg')%>" className="elements__image" alt="место в России"/>
-              <button type="button" className="elements__button-delite elements__button-delite_hidden">
-              </button>
-              <div className="elements__name">
-                <h2 className="elements__title">Камчатка</h2>
-                <div className="elements__group">
-                  <button type="button" className="elements__button-like">
-                  </button>
-                  <p className="elements__counter">0</p>
-                </div>
-              </div>
-            </div>
-          </template>
-        </section>
+          <Card/>
       </main>
     )
   );
