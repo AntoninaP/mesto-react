@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
@@ -103,4 +102,6 @@ const newApi = new Api({
     authorization: 'b9b88552-735f-4768-bf07-4ff3fcde19d4',
     'Content-Type': 'application/json'
   }
-});
+})
+
+export default newApi
