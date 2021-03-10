@@ -11,7 +11,7 @@ class Api {
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
- // запрос данных пользователя с сервера
+  // запрос данных пользователя с сервера
   getProfileInfo() {
     return fetch(this.baseUrl + 'users/me', {
       headers: this.headers
