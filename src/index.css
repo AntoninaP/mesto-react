@@ -48,5 +48,7 @@
 @import url(./blocks/popup/__button/_small/popup__button_small.css);
 @import url(./blocks/popup/__button/_submit_inactive/popup__button_submit_inactive.css);
 @import url(./blocks/popup/__close-button/_small/popup__close-button_small.css);
+@import url(./blocks/page/page.css);
+
 
 
