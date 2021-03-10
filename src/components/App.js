@@ -11,6 +11,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
+  const [selectedCard, setCard] = React.useState(null);
+
 
   function handleEditAvatarClick () {
     setIsEditAvatarPopupOpen(true);
@@ -24,10 +26,15 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(card) {
+    setCard(card);
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
+    setCard(null)
   }
 
   return (
@@ -37,6 +44,7 @@ function App() {
         onEditProfile = {handleEditProfileClick}
         onEditAvatar = {handleEditAvatarClick}
         onAddPlace = {handleAddPlaceClick}
+        onCardClick = {handleCardClick}
       />
       <Footer/>
 
@@ -78,7 +86,7 @@ function App() {
         </>
       </PopupWithForm>
 
-      <ImagePopup/>
+      <ImagePopup onClose={closeAllPopups} card={selectedCard}/>
 
       <PopupWithForm name="popup-delete-card" title="Вы уверены?">
         <>
@@ -98,9 +106,6 @@ function App() {
           <button type="submit" className="popup__button popup__button_small popup__button-place">Создать</button>
         </>
       </PopupWithForm>
-
-      {/*<script type="module" src="../index.js">*/}
-      {/*</script>*/}
       </body>
   );
 }

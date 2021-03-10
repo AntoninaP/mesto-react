@@ -17,6 +17,15 @@ function Main(props) {
       })
   }, [])
 
+  const [cards, loadCards] = React.useState([]);
+
+  React.useEffect(() => {
+    newApi.getInitialCards()
+      .then((data) => {
+        loadCards(data)
+      })
+  }, [])
+
 
   return (
     (
@@ -39,7 +48,15 @@ function Main(props) {
                   onClick={props.onAddPlace}>
           </button>
         </section>
-          <Card/>
+        <section className="elements root__elements">
+          {
+            cards.map((card, i) => (
+              <Card handleCardClick={props.onCardClick}
+                    card={card}
+              />
+            ))
+          }
+        </section>
       </main>
     )
   );
