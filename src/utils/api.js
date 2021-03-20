@@ -74,8 +74,17 @@ class Api {
       .then(this._checkResponse)
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return this._putLike(cardId)
+    } else {
+      return this._deleteLike(cardId)
+    }
+  }
+
+
   //поставить лайк
-  putLike(cardId) {
+  _putLike(cardId) {
     return fetch(this.baseUrl + `cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this.headers,
@@ -84,7 +93,7 @@ class Api {
   }
 
   //удалить лайк
-  deleteLike(cardId) {
+  _deleteLike(cardId) {
     return fetch(this.baseUrl + `cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,

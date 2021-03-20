@@ -2,8 +2,13 @@ import React from "react";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Card(props) {
+
   function handleClick() {
     props.handleCardClick(props.card);
+  }
+
+  function handleLikeClick() {
+    props.onCardLike(props.card);
   }
 
   const currentUser = React.useContext(CurrentUserContext);
@@ -32,7 +37,7 @@ function Card(props) {
         <div className="elements__name">
           <h2 className="elements__title">{props.card.name}</h2>
           <div className="elements__group">
-            <button type="button" className={cardLikeButtonClassName}>
+            <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}>
             </button>
             <p className="elements__counter">{props.card.likes.length}</p>
           </div>

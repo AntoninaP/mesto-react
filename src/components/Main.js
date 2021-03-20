@@ -6,24 +6,17 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 function Main(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
-
-  // const [userName, setUserName] = React.useState('');
-  // const [userDescription, setDescription] = React.useState('');
-  // const [userAvatar, setAvatar] = React.useState('');
-  //
-  // React.useEffect(() => {
-  //   newApi.getProfileInfo()
-  //     .then((data) => {
-  //       setUserName(data.name);
-  //       setDescription(data.about);
-  //       setAvatar(data.avatar);
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err)
-  //     })
-  // }, [])
-
   const [cards, setCards] = React.useState([]);
+
+
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    newApi.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    });
+  }
 
   React.useEffect(() => {
     newApi.getInitialCards()
@@ -56,15 +49,16 @@ function Main(props) {
                 onClick={props.onAddPlace}>
         </button>
       </section>
-        <section className="elements root__elements">
-          {
-            cards.map((card, i) => (
-              <Card key={card._id} handleCardClick={props.onCardClick}
-                    card={card}
-              />
-            ))
-          }
-        </section>
+      <section className="elements root__elements">
+        {
+          cards.map((card, i) => (
+            <Card key={card._id} handleCardClick={props.onCardClick}
+                  onCardLike={handleCardLike}
+                  card={card}
+            />
+          ))
+        }
+      </section>
     </main>
   );
 }
