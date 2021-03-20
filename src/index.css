@@ -22,6 +22,7 @@
 @import url(./blocks/elements/__button-like/elements__button-like.css);
 @import url(./blocks/elements/__button-like/__button-like_black/elements__button-like_black.css);
 @import url(./blocks/elements/__button-delite/elements__button-delite.css);
+@import url(./blocks/elements/__button-delite/_hidden/elements__button-delite_hidden.css);
 @import url(./blocks/elements/__counter/elements__counter.css);
 @import url(./blocks/elements/__group/elements__group.css);
 @import url(./blocks/footer/footer.css);

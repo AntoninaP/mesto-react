@@ -56,15 +56,15 @@ function Main(props) {
                 onClick={props.onAddPlace}>
         </button>
       </section>
-      <section className="elements root__elements">
-        {
-          cards.map((card, i) => (
-            <Card key={card._id} handleCardClick={props.onCardClick}
-                  card={card}
-            />
-          ))
-        }
-      </section>
+        <section className="elements root__elements">
+          {
+            cards.map((card, i) => (
+              <Card key={card._id} handleCardClick={props.onCardClick}
+                    card={card}
+              />
+            ))
+          }
+        </section>
     </main>
   );
 }
