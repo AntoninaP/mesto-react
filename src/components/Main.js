@@ -18,6 +18,12 @@ function Main(props) {
     });
   }
 
+  function handleCardDelete(card) {
+    newApi.deleteCard(card._id).then((newCard) => {
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    });
+  }
+
   React.useEffect(() => {
     newApi.getInitialCards()
       .then((data) => {
@@ -53,7 +59,7 @@ function Main(props) {
         {
           cards.map((card, i) => (
             <Card key={card._id} handleCardClick={props.onCardClick}
-                  onCardLike={handleCardLike}
+                  onCardLike={handleCardLike} onCardDelete={handleCardDelete}
                   card={card}
             />
           ))

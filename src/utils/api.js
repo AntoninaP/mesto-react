@@ -67,7 +67,7 @@ class Api {
 
   // удаление карточки
   deleteCard(cardId) {
-    return fetch(this.baseUrl + `cards/likes/${cardId}`, {
+    return fetch(this.baseUrl + `cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
     })
@@ -81,7 +81,6 @@ class Api {
       return this._deleteLike(cardId)
     }
   }
-
 
   //поставить лайк
   _putLike(cardId) {
