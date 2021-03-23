@@ -4,6 +4,8 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import newApi from "../utils/api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
@@ -15,7 +17,7 @@ function App() {
 
   const [selectedCard, setCard] = React.useState(null);
 
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({name: '', about: '', avatar: ''});
 
   React.useEffect(() => {
     newApi.getProfileInfo()
@@ -44,6 +46,16 @@ function App() {
     setCard(card);
   }
 
+  function handleUpdateUser(user) {
+    newApi.editProfileInfo(user.name, user.about)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -63,24 +75,9 @@ function App() {
               onCardClick={handleCardClick}
             />
             <Footer/>
-
-            <PopupWithForm name="user" title="Редактировать профиль" isOpen={isEditProfilePopupOpen}
-                           onClose={closeAllPopups}>
-              <label>
-                <input id="user-input" type="text" name="name" value="" className="popup__input popup__input-name"
-                       placeholder="Имя" required minLength="2" maxLength="40"/>
-                <span className="popup__input-error user-input-error">
-            </span>
-              </label>
-              <label>
-                <input id="job-input" type="text" name="profession" value="" className="popup__input popup__input-job"
-                       placeholder="О себе" required minLength="2" maxLength="200"/>
-                <span className="popup__input-error job-input-error">
-            </span>
-              </label>
-              <button type="submit" className="popup__button">Сохранить</button>
-            </PopupWithForm>
-
+            <EditProfilePopup isOpen={isEditProfilePopupOpen}
+                              onClose={closeAllPopups}
+                              onUpdateUser={handleUpdateUser}/>
             <PopupWithForm name="place" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
               <label>
                 <input id="place-input" type="text" name="place-title" value=""
@@ -105,17 +102,7 @@ function App() {
               <button type="submit" className="popup__button popup__button_small popup__button-place">Да</button>
             </PopupWithForm>
 
-            <PopupWithForm name="avatar" title="Обновить аватар?" isOpen={isEditAvatarPopupOpen}
-                           onClose={closeAllPopups}>
-              <label>
-                <input id="input" type="url" name="image" value=""
-                       className="popup__input popup__input_small popup__input-image"
-                       placeholder="Ссылка на картинку" required pattern="https?://.+"/>
-                <span className="popup__input-error input-error">
-              </span>
-              </label>
-              <button type="submit" className="popup__button popup__button_small popup__button-place">Создать</button>
-            </PopupWithForm>
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
           </div>
         </div>
     </CurrentUserContext.Provider>
