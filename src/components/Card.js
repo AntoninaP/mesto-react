@@ -8,11 +8,11 @@ function Card(props) {
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    props.handleCardLike(props.card);
   }
 
   function handleCardDelete() {
-    props.onCardDelete(props.card);
+    props.handleCardDelete(props.card);
   }
 
   const currentUser = React.useContext(CurrentUserContext);

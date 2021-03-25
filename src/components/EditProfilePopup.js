@@ -15,11 +15,6 @@ function EditProfilePopup(props) {
     setDescription(e.target.value);
   }
 
-  // function handleClear() {
-  //   setName('');
-  //   setDescription('');
-  // }
-
 // Подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
