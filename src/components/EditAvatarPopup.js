@@ -2,26 +2,21 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
-  const [avatar, setAvatar] = React.useState('');
   const avatarRef = React.useRef('');
-
-  function handleChangeAvatar(e) {
-    setAvatar(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar({
       avatar: avatarRef.current.value
     });
-    setAvatar('')
+    avatarRef.current.value = '';
   }
 
   return (
     <PopupWithForm name="avatar" title="Обновить аватар?" isEditAvatarPopupOpen={props.isOpen}
                    closeAllPopups={props.onClose} onSubmit={handleSubmit}>
       <label>
-        <input id="input" type="url" value={avatar} name="image" ref={avatarRef} onChange={handleChangeAvatar}
+        <input id="input" type="url" name="image" ref={avatarRef}
                className="popup__input popup__input_small popup__input-image"
                placeholder="Ссылка на картинку" required pattern="https?://.+"/>
         <span className="popup__input-error input-error">
